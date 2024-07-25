@@ -1,0 +1,8 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: "KafkaProducer"
+  kafka:
+    bootstrap-servers: "localhost:29092"
