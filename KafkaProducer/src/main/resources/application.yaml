@@ -4,5 +4,36 @@ server:
 spring:
   application:
     name: "KafkaProducer"
-  kafka:
-    bootstrap-servers: "localhost:29092"
+  profiles:
+    # https://codesarray.com/view/Multiple-application-properties-file-in-spring-boot
+    active: "local"
+    default: "local"
+
+
+
+logging:
+  level:
+    root: info
+
+
+
+#Actuator
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "health,info,env,beans"
+  info:
+    env:
+      enabled: "true"
+
+#Actuator
+# /actuator/info
+info:
+  application:
+    name: @project.name@
+    description: @project.description@
+    version: @project.version@
+    author: "Manthan Patidar"
+    slack: "https://app.slack.com/client/T028GFUJJ1E/D03784GU9MJ"
+    linkedIn: "https://www.linkedin.com/in/manthan-patidar/"

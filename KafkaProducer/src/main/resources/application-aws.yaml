@@ -1,0 +1,3 @@
+spring:
+  kafka:
+    bootstrap-servers: "b-1.manthankafkacluster.a82h58.c2.kafka.ap-south-1.amazonaws.com:9098,b-2.manthankafkacluster.a82h58.c2.kafka.ap-south-1.amazonaws.com:9098"
