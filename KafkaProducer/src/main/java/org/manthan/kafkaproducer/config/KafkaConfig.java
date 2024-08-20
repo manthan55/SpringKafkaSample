@@ -32,6 +32,7 @@ public class KafkaConfig {
         config.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, JsonSerializer.class);
 //        config.put(JsonSerializer.ADD_TYPE_INFO_HEADERS, false);
 
+        // only for AWS
         if(activeProfile.equals("aws")){
             config.put("security.protocol", "SASL_SSL");
             config.put(SaslConfigs.SASL_MECHANISM, "AWS_MSK_IAM");
