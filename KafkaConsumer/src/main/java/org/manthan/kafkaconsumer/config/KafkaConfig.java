@@ -35,10 +35,13 @@ public class KafkaConfig {
 //        deserializer.addTrustedPackages("*");
         deserializer.setUseTypeMapperForKey(true);
 
+        // although we have mentioned Key and value deserializers in config,
+        // they are over-ridden by the new StringDeserializer() and deserializer we passed to the DefaultKafkaConsumerFactory in return statement
+        // Passing deserializers direclty in DefaultKafkaConsumerFactory allows us to configure them like we did for JsonDeserializer above
         Map<String, Object> config = new HashMap<>();
         config.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, bootstrapServers);
-        config.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, StringSerializer.class);
-        config.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, JsonSerializer.class);
+        config.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class);
+        config.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, JsonDeserializer.class);
 
         // only for AWS
         if(activeProfile.equals("aws")){
@@ -47,6 +50,8 @@ public class KafkaConfig {
             config.put(SaslConfigs.SASL_JAAS_CONFIG, "software.amazon.msk.auth.iam.IAMLoginModule required awsDebugCreds=true;");
             config.put(SaslConfigs.SASL_CLIENT_CALLBACK_HANDLER_CLASS, "software.amazon.msk.auth.iam.IAMClientCallbackHandler");
         }
+
+//        return new DefaultKafkaConsumerFactory<>(config); // will use deserializers from config
 
 //        return new DefaultKafkaConsumerFactory<>(config, new StringDeserializer(), new JsonDeserializer<>(MessageDTO.class));
         return new DefaultKafkaConsumerFactory<>(config, new StringDeserializer(), deserializer);

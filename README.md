@@ -1,4 +1,4 @@
-# SpringRedisSample
+# SpringKafkaSample
 This is a sample application demonstrating Kafka messaging in Spring Boot. This app is also deployable to AWS ElasticBeanstalk and integrates with AWS MSK.
 
 ---

@@ -32,6 +32,7 @@ management:
 # /actuator/info
 info:
   application:
+#    name: ${project.name}  # this doesn't work -- just prints "${project.name}" literally
     name: @project.name@
     description: @project.description@
     version: @project.version@
